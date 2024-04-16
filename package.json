@@ -1,0 +1,26 @@
+{
+  "name": "win-front",
+  "version": "0.1.0",
+  "author": "Turysheva Kate <tais_kat@list.ru>",
+  "type": "module",
+  "description": "Test Request. Fromt",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NEXT_PUBLIC_NODE_ENV=dev node server.js",
+    "build": "next build",
+    "start": "NEXT_PUBLIC_NODE_ENV=prod node server.js",
+    "lint": "next lint",
+    "ui": "npm uninstall ../win-ui/ and  npm install ../win-ui/ --save"
+  },
+  "dependencies": {
+    "@next/font": "13.1.6",
+    "@reduxjs/toolkit": "^1.9.3",
+    "chihiro-ui": "../win-ui/",
+    "formik": "^2.2.9",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
+    "sass": "^1.58.3"
+  }
+}
