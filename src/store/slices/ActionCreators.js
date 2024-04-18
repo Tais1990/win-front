@@ -1,39 +1,13 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import formAPI from "@/api/formAPI";
-import documentAPI from '@/api/documentAPI';
-import blockAPI from "@/api/newsAPI";
-import propsAPI from "@/api/propsAPI";
-/*
-export const fetchForm = createAsyncThunk(
-    'api/post/get',
-    async (_, thunkAPI) => {
-        try {
-            console.log('Пытаемся обратиться в запро');
-            const response = await formAPI.get('test');
-            console.log('Результат из запроса', response);
-            return response;
-        } catch (e) {
-            return thunkAPI.rejectWithValue("Не удалось загрузить анные о формах")
-        }
-    }
-)
-*/
-export const sendForm = createAsyncThunk(
-    'api/form/post',
-    async({code, form}, thunkAPI) => {
-        try {
-            return await formAPI.send(code, form);
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error)
-        }
-    }
-)
+import articlesAPI from "@/api/articlesAPI";
+import authAPI from "@/api/authAPI";
+import newsAPI from "@/api/newsAPI";
 
-export const fetchDocuments = createAsyncThunk(
-    'api/documents/get',
-    async ({codeTable}, thunkAPI) => {
+export const fetchArticle = createAsyncThunk(
+    'api/articles/get',
+    async ({id}, thunkAPI) => {
         try {
-            const response = await documentAPI.getAll(codeTable);
+            const response = id ? await articlesAPI.getArticleByID(id) : {};
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -41,14 +15,14 @@ export const fetchDocuments = createAsyncThunk(
     }
 )
 
-export const sendDocument = createAsyncThunk(
-    'api/documents/post',
-    async ({codeTable, form}, thunkAPI) => {
+export const sendArticle = createAsyncThunk(
+    'api/article/post',
+    async ({id, form}, thunkAPI) => {
         try {
             if (form.id) {
-                return await documentAPI.update(codeTable, form)
+                return await articlesAPI.editArticle(id, form);
             } else {
-                return await documentAPI.create(codeTable, form)
+                // return await documentAPI.create(id, form)
             }
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -56,11 +30,38 @@ export const sendDocument = createAsyncThunk(
     }
 )
 
-export const fetchFormSettings = createAsyncThunk(
-    'api/formSettings/get',
+export const registerUser = createAsyncThunk(
+    'api/auth/signup',
+    async ({name, email, password}, thunkAPI) => {
+        try {
+            return await authAPI.signup(name, email, password)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+
+export const login = createAsyncThunk(
+    'api/auth/signin',
+    async ({email, password}, thunkAPI) => {
+        try {
+            const data = await authAPI.signin(email, password);
+            // аозможно, не самый разумный вариант
+            localStorage.setItem('userToken', data.accessToken)
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+
+export const fetchNews = createAsyncThunk(
+    'api/news/get',
     async (_, thunkAPI) => {
         try {
-            const response = await blockAPI.getAllBlocks('forms')
+            const response = await newsAPI.getMyNews();
             return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -68,38 +69,3 @@ export const fetchFormSettings = createAsyncThunk(
     }
 )
 
-export const fetchCollectiveSettings = createAsyncThunk(
-    'api/collectiveSettings/get',
-    async (_, thunkAPI) => {
-        try {
-            const response = await blockAPI.getAllBlocks('collective')
-            return response;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error)
-        }
-    }
-)
-
-export const fetchPropsByID = createAsyncThunk(
-    'api/props/get',
-    async ({id}, thunkAPI) => {
-        try {
-            const response = await propsAPI.getByID(id)
-            return response;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error)
-        }
-    }
-)
-
-export const fetchPropsByCodeBlock = createAsyncThunk(
-    'api/props/get',
-    async ({codeBlock}, thunkAPI) => {
-        try {
-            const response = await propsAPI.getByCodeBlock(codeBlock)
-            return response;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error)
-        }
-    }
-)

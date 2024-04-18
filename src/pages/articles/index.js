@@ -1,21 +1,22 @@
 
 import React, {useState, useEffect} from "react";
-import Head from "next/head";
 
-export default function Articles({}) {
-  return ( 
-    <>
-        <Head>
-            <title>Articles</title>
-            <meta name="description" content="Articles" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        
-        <main>
-          <h1>Список статей дя редактирования</h1>
-        </main>
-    </>  ) 
+import articlesAPI from '@/api/articlesAPI'
+import WorkspaceLayout from "@/layouts/WorkspaceLayout/WorkspaceLayout";
+
+export default function Articles({ articles }) {
+  return (
+    <WorkspaceLayout title="Текущие статьи">
+      <h1>Тут будет таблица со статьяи</h1>
+    </WorkspaceLayout>
+  )
 }
-
-
+// в действительности - нет смысла выдяяляьб это так, т.к. это нам не обязателноно надо собирать на серваке
+export async function getStaticProps(context) {
+  const articles = await articlesAPI.getAll()
+  return {
+    props: { 
+      articles
+     }, 
+  }
+}

@@ -1,11 +1,21 @@
+
+const config = (await import(`../../config.js`)).default(process.env.NEXT_PUBLIC_NODE_ENV)
 const api = {
     urlServer() {
         // return process.env.API_SERVER_ENV;
-        return "http://localhost:3201/api/"
+        return config.api.url;
     },
     async get(url) {
-        try {
-            const response = await fetch(`${this.urlServer()}${url}`, { method: 'GET' });
+        try {            
+            const userToken = (typeof window !== 'undefined') && localStorage && localStorage.getItem('userToken')
+                ? localStorage.getItem('userToken')
+                : null
+            const response = await fetch(`${this.urlServer()}${url}`, {
+                method: 'GET',
+                headers: {
+                    'x-access-token': `${userToken}`
+                }
+            });
             // TODO Реализовать обработку ошибко разных с сервера, а не только то, что сервер отключен
             const body = response.json();
             return body;
