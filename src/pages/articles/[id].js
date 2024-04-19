@@ -12,7 +12,6 @@ export default function Article({ }) {
   const { id } = router.query 
   return (
     <WorkspaceLayout title="Редактирование статьи">
-      <h1>Страница редактирования статьи {id}</h1>
       <ArticleEdit id={id}></ArticleEdit>
     </WorkspaceLayout>
   )

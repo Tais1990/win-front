@@ -2,9 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import { fetchArticle } from '@/store/slices/ActionCreators.js'
 
-export default function ArticleEdit({id}) {
-    console.log('редатикероние карточки', id);
+import dynamic from 'next/dynamic';
+const TextEditor = dynamic(() => import('../TextEditor'), { ssr: false });
+import {TextEditorProvider} from '../TextEditor'
+import ToolPanel from '../ToolPanel/ToolPanel';
+import SendButton from '../TextEditor/SendButton';
 
+export default function ArticleEdit({id}) {
     const dispatch = useDispatch()
     const articleStore = useSelector((state) => state.article) 
 
@@ -14,15 +18,19 @@ export default function ArticleEdit({id}) {
 
     // Обработка крутилки и ошибки
 
+    let defaultValue = '<h1>текст по умолчанию</h1>'
+    // TODO разобраться, почему дефолтное значение не парситься на предмент выбранного форматирования
+
+    
+    // стейт с данными о доп материалах - картинках и документов
+
     return (
-        <div>
-            <h1>КОмпонент редактирования статьи</h1>
-            {articleStore.isSuccessful &&
-                <div>
-                    <h1>{articleStore.article.title}</h1>
-                    <h1>{articleStore.article.text}</h1>
-                </div>}
-        </div>
+        <TextEditorProvider defaulTtext={defaultValue}>
+            <ToolPanel/>
+            <TextEditor/>
+            <SendButton/>
+            {/* Другие компоненты загрузки картинок и файлов */}
+         </TextEditorProvider>
     )
 
 }
