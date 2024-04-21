@@ -42,6 +42,18 @@ export default function ToolPanel({ } ) {
       <button
         className={cn(
           "tool-panel__item",
+          currentBlockType === BlockType.blockquote && "tool-panel__item_active"
+        )}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleBlockType(BlockType.blockquote);
+        }}
+      >
+        Цитата
+      </button>
+      <button
+        className={cn(
+          "tool-panel__item",
           currentBlockType === BlockType.cite && "tool-panel__item_active"
         )}
         onMouseDown={(e) => {
