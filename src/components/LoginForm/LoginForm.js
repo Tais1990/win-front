@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from "react";
-import { createNews, deleteNews, fetchNews, login, updateNews } from '@/store/slices/ActionCreators.js'
+import { createNews, deleteNews, fetchNews, login, publishNews, updateNews } from '@/store/slices/ActionCreators.js'
 
 export default function LoginForm({}) {
     const dispatch = useDispatch()
@@ -80,6 +80,14 @@ export default function LoginForm({}) {
                 }))
             }}
             >Удаление новости</button> 
+
+            <br/><br/>
+            <button onClick={() => {
+                dispatch(publishNews({
+                    id: '6622a9d9657e0961bfd77e86'
+                }))
+            }}
+            >Публикация нвости</button> 
         </div>
     )
 

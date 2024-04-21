@@ -53,7 +53,14 @@ const newsAPI = {
         } catch (error) {
             throw error
         }
-    }
-    
+    },
+    async publish(id) {
+        try {
+            const url = `news/${id}/publish`
+            return await api.put(url)
+        } catch (error) {
+            throw error
+        }
+    }    
 }
 export default newsAPI;
