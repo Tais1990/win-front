@@ -25,12 +25,36 @@ const api = {
     },
     async post(url, form) {
         try {
+            const userToken = (typeof window !== 'undefined') && localStorage && localStorage.getItem('userToken')
+                ? localStorage.getItem('userToken')
+                : null
             const response = await fetch(`${this.urlServer()}${url}`, {
                 method: 'POST',
                 body: JSON.stringify(form),
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-access-token': `${userToken}`
+                }
+            });
+            if (!response.ok) {
+                throw (await response.json()).detail || 'Error in request'
+            }
+            return  await response.json()
+        } catch(error) {
+            throw error;
+        }
+    },
+    async postFormData(url, formData) {
+        try {
+            const userToken = (typeof window !== 'undefined') && localStorage && localStorage.getItem('userToken')
+                ? localStorage.getItem('userToken')
+                : null
+            const response = await fetch(`${this.urlServer()}${url}`, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'x-access-token': `${userToken}`
                 }
             });
             if (!response.ok) {
@@ -43,12 +67,16 @@ const api = {
     },
     async put(url, form) {
         try {
+            const userToken = (typeof window !== 'undefined') && localStorage && localStorage.getItem('userToken')
+                ? localStorage.getItem('userToken')
+                : null
             const response = await fetch(`${this.urlServer()}${url}`, {
                 method: 'PUT',
                 body: JSON.stringify(form),
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-access-token': `${userToken}`
                 }
             });
             if (!response.ok) {

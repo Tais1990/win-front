@@ -8,6 +8,11 @@ import {TextEditorProvider} from '../TextEditor'
 import ToolPanel from '../ToolPanel/ToolPanel';
 import SendButton from '../TextEditor/SendButton';
 
+import UploadImage from '../Upload/UploadImage';
+import UploadFile from '../Upload/UploadFile';
+import UploadMany from '../Upload/UploadMany';
+import Test from '../Upload/Test';
+
 export default function ArticleEdit({id}) {
     const dispatch = useDispatch()
     const articleStore = useSelector((state) => state.article) 
@@ -28,7 +33,24 @@ export default function ArticleEdit({id}) {
         <TextEditorProvider defaulTtext={defaultValue}>
             <ToolPanel/>
             <TextEditor/>
+            <UploadImage/>
+            {/* <UploadImage src='https://i.ibb.co/RTcFtrq/DVnew-Year-3-938x1024.jpg'/> */}
+            {/* <UploadFile/> */}
+            <hr/>
+            {/* <UploadMany
+                data = {[{text: 'текст 11'}, {text: 'текст 2'}]}
+                component={ (index, props, callback) => (<Test index={index} props={props} callback={callback}/>)}/>
+            <hr/> */}
+            <br/>
+            <UploadMany
+                data = {[{src: 'https://i.ibb.co/RTcFtrq/DVnew-Year-3-938x1024.jpg'}]}
+                component={ (index, props, callback) => (<UploadImage index={index} props={props} callback={callback}/>)}/>
+            <br/>
+            <hr/>
+            
             <SendButton/>
+
+
             {/* Другие компоненты загрузки картинок и файлов */}
          </TextEditorProvider>
     )

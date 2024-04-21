@@ -2,6 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import articlesAPI from "@/api/articlesAPI";
 import authAPI from "@/api/authAPI";
 import newsAPI from "@/api/newsAPI";
+import filesAPI from "@/api/filesAPI";
 
 export const fetchArticle = createAsyncThunk(
     'api/articles/get',
@@ -93,4 +94,15 @@ export const updateNews = createAsyncThunk(
     }
 )
 
+export const uploadFiles = createAsyncThunk (
+    'api/files/post',
+    async ({ files }, thunkAPI) => {
+        try {
+            const filesUrl = await filesAPI.upload(files)
+            return filesUrl
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+)
 

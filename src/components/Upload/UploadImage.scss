@@ -1,0 +1,65 @@
+.hide {
+    display: none;
+}
+.upload-image {
+    img {
+        width: 200px;
+        height: 200px;  
+        border-radius: 10px;             
+    }
+    input {
+        display: none;
+    }
+    label {
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: gray;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: x-large;
+            font-weight: 600;
+            cursor: pointer; 
+            border-radius: 10px;           
+        }
+    }
+}
+.upload-many{    
+    &__items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    &__item {        
+        margin: 20px;
+        border-radius: 50px;
+        padding: 30px;
+        background-color: lightgrey;
+        &_new {
+            background-color: lightgreen;
+        }
+        &_deleted {
+            background-color: tomato;
+        }
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    button {
+        min-width: 150px;
+        height: 50px;
+        border-radius: 10px;
+        font-size: larger;
+        font-weight: 600;
+        margin: 10px;
+        cursor: pointer;
+        &.delete {
+            background-color: tomato;
+        }
+        &.add {
+            background-color: lightgreen;
+        }
+    }
+}
