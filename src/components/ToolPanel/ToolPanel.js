@@ -54,6 +54,18 @@ export default function ToolPanel({ } ) {
       <button
         className={cn(
           "tool-panel__item",
+          currentBlockType === BlockType.code && "tool-panel__item_active"
+        )}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleBlockType(BlockType.code);
+        }}
+      >
+        Код
+      </button>
+      <button
+        className={cn(
+          "tool-panel__item",
           currentBlockType === BlockType.cite && "tool-panel__item_active"
         )}
         onMouseDown={(e) => {

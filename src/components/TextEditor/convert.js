@@ -52,6 +52,8 @@ export const stateToHTML = convertToHTML({
         };
       case BlockType.blockquote:
         return <blockquote />;
+      case BlockType.code:
+          return <code />;
       case BlockType.default:
         return <p />;
       default:
@@ -104,6 +106,8 @@ export const HTMLtoState = convertFromHTML({
         return BlockType.list;
       case "blockquote":
         return BlockType.blockquote;
+      case "code-block":
+          return BlockType.code;
       case "cite":
         return BlockType.cite;
       case "div":

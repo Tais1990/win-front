@@ -10,7 +10,30 @@ import { EntityType, InlineStyle } from "./config"
 import { HTMLtoState, stateToHTML } from "./convert"
 import LinkDecorator from "./Link";
 
-const decorator = new CompositeDecorator([LinkDecorator]);
+import PrismDecorator from 'draft-js-prism';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism.css'
+import MultiDecorator from 'draft-js-multidecorators'
+
+
+var decorator = new MultiDecorator([
+  new CompositeDecorator([LinkDecorator]),
+  new PrismDecorator({prism: Prism, 
+    //TODO потыкать в другие языки
+    // getSyntax(block) {
+    //   console.log('--------------------', block, block.getData().get('syntax'));
+    //   const data = block.getData();
+    //   const language = data.get('language') || data.get('syntax');
+    //   console.log('~~~', data, language);
+    //   if (typeof Prism.languages[language] === 'object') {
+    //     console.log('!!!', language);
+    //     return language;
+    //   }
+    //   return 'javascript'
+    // },
+    defaultSyntax: 'javascript',
+  })
+]);
 
 export const useEditor = (html=null) => {
   const [state, setState] = React.useState(() =>
