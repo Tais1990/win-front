@@ -29,7 +29,23 @@ const newsAPI = {
             console.log("!! Произошла ошибка", er)
             throw er
         }
-    }
+    },
+    async create(title, text, pubDate) {
+        try {
+            const url = `news`
+            return await api.post(url, {title, text, pubDate})
+        } catch (error) {
+            throw error
+        }
+    },
+    async update(id, title, text, pubDate) {
+        try {
+            const url = `news`
+            return await api.put(url, {id, title, text, pubDate})
+        } catch (error) {
+            throw error
+        }
+    },
     
 }
 export default newsAPI;

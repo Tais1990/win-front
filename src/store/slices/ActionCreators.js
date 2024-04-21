@@ -69,3 +69,28 @@ export const fetchNews = createAsyncThunk(
     }
 )
 
+export const createNews = createAsyncThunk(
+    'api/news/post',
+    async ({title, text, pubDate}, thunkAPI) => {
+        try {
+            const data = await newsAPI.create(title, text, pubDate)
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+export const updateNews = createAsyncThunk(
+    'api/news/put',
+    async ({id, title, text, pubDate}, thunkAPI) => {
+        try {
+            const data = await newsAPI.update(id, title, text, pubDate)
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+

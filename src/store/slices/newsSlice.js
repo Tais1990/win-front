@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchNews } from './ActionCreators.js'
+import { fetchNews, createNews, updateNews } from './ActionCreators.js'
 
 // Начальное значение
 const initialState = {
@@ -31,6 +31,42 @@ const newsSlice = createSlice({
       state.error = action.payload;
       state.news = [];
     },
+
+    [createNews.fulfilled.type]: (state, action) => {
+      state.isLoad = false;
+      state.error = null;
+      state.result = action.payload;
+      state.isSuccessful = true;
+    },
+    [createNews.pending.type]: (state) => {
+      state.isLoad = true;
+      state.result = {};
+      state.isSuccessful = false;
+    },
+    [createNews.rejected.type]: (state, action) => {
+      state.isLoad = false;
+      state.error = action.payload;
+      state.result = {};
+      state.isSuccessful = false;
+    },
+
+    [updateNews.fulfilled.type]: (state, action) => {
+      state.isLoad = false;
+      state.error = null;
+      state.result = action.payload;
+      state.isSuccessful = true;
+    },
+    [updateNews.pending.type]: (state) => {
+      state.isLoad = true;
+      state.result = {};
+      state.isSuccessful = false;
+    },
+    [updateNews.rejected.type]: (state, action) => {
+      state.isLoad = false;
+      state.error = action.payload;
+      state.result = {};
+      state.isSuccessful = false;
+    }
   }
 });
 
