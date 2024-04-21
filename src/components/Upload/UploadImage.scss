@@ -1,7 +1,7 @@
 .hide {
-    display: none;
+    display: none !important;
 }
-.upload-image {
+.upload-image, .upload-file {
     img {
         width: 200px;
         height: 200px;  
@@ -23,6 +23,19 @@
             cursor: pointer; 
             border-radius: 10px;           
         }
+    }
+    .preview {
+        width: 400px;
+        height: 50px;  
+        border-radius: 10px; 
+        background-color: gray;
+        color: white;
+        font-size: x-large;
+        font-weight: 600;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 .upload-many{    
