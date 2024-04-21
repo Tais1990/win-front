@@ -94,6 +94,18 @@ export const updateNews = createAsyncThunk(
     }
 )
 
+export const deleteNews = createAsyncThunk(
+    'api/news/delete',
+    async ({id}, thunkAPI) => {
+        try {
+            const data = await newsAPI.delete(id)
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
 export const uploadFiles = createAsyncThunk (
     'api/files/post',
     async ({ files }, thunkAPI) => {

@@ -11,7 +11,6 @@ import SendButton from '../TextEditor/SendButton';
 import UploadImage from '../Upload/UploadImage';
 import UploadFile from '../Upload/UploadFile';
 import UploadMany from '../Upload/UploadMany';
-import Test from '../Upload/Test';
 
 export default function ArticleEdit({id}) {
     const dispatch = useDispatch()

@@ -86,6 +86,23 @@ const api = {
         } catch(error) {
             throw error;
         }
-    }
+    },
+    async delete(url) {
+        try {            
+            const userToken = (typeof window !== 'undefined') && localStorage && localStorage.getItem('userToken')
+                ? localStorage.getItem('userToken')
+                : null
+            const response = await fetch(`${this.urlServer()}${url}`, {
+                method: 'DELETE',
+                headers: {
+                    'x-access-token': `${userToken}`
+                }
+            });
+            const body = response.json();
+            return body;
+        } catch(error) {
+            throw error;
+        }
+    },
 }
 export default api;

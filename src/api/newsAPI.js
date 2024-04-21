@@ -46,6 +46,14 @@ const newsAPI = {
             throw error
         }
     },
+    async delete(id) {
+        try {
+            const url = `news/${id}`
+            return await api.delete(url)
+        } catch (error) {
+            throw error
+        }
+    }
     
 }
 export default newsAPI;
