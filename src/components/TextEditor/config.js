@@ -27,7 +27,6 @@ export const BlockType = {
     BOLD: "BOLD",
     ITALIC: "ITALIC",
     UNDERLINE: "UNDERLINE",
-    ACCENT: "ACCENT",
   }
 
   const CUSTOM_BLOCK_RENDER_MAP = Immutable.Map({

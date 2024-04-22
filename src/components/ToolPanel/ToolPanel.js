@@ -66,18 +66,6 @@ export default function ToolPanel({ } ) {
       <button
         className={cn(
           "tool-panel__item",
-          currentBlockType === BlockType.cite && "tool-panel__item_active"
-        )}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleBlockType(BlockType.cite);
-        }}
-      >
-        Сноска
-      </button>
-      <button
-        className={cn(
-          "tool-panel__item",
           currentBlockType === BlockType.default && "tool-panel__item_active"
         )}
         onMouseDown={(e) => {
@@ -104,26 +92,7 @@ export default function ToolPanel({ } ) {
         </button>
       ))}
 
-      <button
-        className="tool-panel__item"
-        onClick={() => {
-          const url = prompt("URL:");
-          if (url) {
-            addLink(url);
-          }
-        }}
-      >
-        LINK
-      </button>
 
-      <button
-        className="tool-panel__item"
-        onClick={() => {
-          console.log(toHtml());
-        }}
-      >
-        Print
-      </button>
     </div>
   );
 }

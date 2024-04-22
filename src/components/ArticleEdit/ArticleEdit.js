@@ -33,12 +33,13 @@ export default function ArticleEdit({id}) {
             <ToolPanel/>
             <TextEditor/>
             <br/>
+            <h1>Загрузка картинок</h1>
             <UploadMany
                 data = {[{src: 'https://i.ibb.co/RTcFtrq/DVnew-Year-3-938x1024.jpg'}]}
                 component={ (index, props, callback) => (<UploadImage index={index} props={props} callback={callback}/>)}/>
-            <br/>
+            <h1>Загрузка файлов</h1>
             <UploadMany
-                data = {[{src: 'https://i.ibb.co/RTcFtrq/DVnew-Year-3-938x1024.jpg'}]}
+                data = {[]}
                 component={ (index, props, callback) => (<UploadFile index={index} props={props} callback={callback}/>)}/>
             
             <SendButton/>
