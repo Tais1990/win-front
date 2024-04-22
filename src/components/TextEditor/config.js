@@ -1,6 +1,10 @@
 import Immutable from 'immutable';
 import { DefaultDraftBlockRenderMap } from 'draft-js';
 
+export const EntityType ={
+  link: "link",
+}
+
 export const BlockType = {
     /* Заголовки */
     h1: 'header-one',
